@@ -33,4 +33,14 @@ class ConnectFour
     end
     puts @board.print
   end
+
+  def check_winner
+    color = @board.check_winner
+    if color == @board.black
+      puts "#{@player_one} wins!"
+    end
+    if color == @board.white
+      puts "#{@player_two} wins!"
+    end
+  end
 end

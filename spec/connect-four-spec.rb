@@ -64,19 +64,56 @@ describe ConnectFour do
       before do
         allow(game).to receive(:gets).and_return('Cathy', 'Alex')
       end
-      it 'updates the board for that position' do
+      it 'updates the board first position in a row' do
         expect(game).to receive(:puts).with("⚬  ⚬  ⚬  ⚬  ⚬  ⚬  ⚬  \n⚬  ⚬  ⚬  ⚬  ⚬  ⚬  ⚬  \n⚬  ⚬  ⚬  ⚬  ⚬  ⚬  ⚬  \n⚬  ⚬  ⚬  ⚬  ⚬  ⚬  ⚬  \n⚬  ⚬  ⚬  ⚬  ⚬  ⚬  ⚬  \n⚬  ⚬  ⚬  ⚬  ⚫ ⚬  ⚬  \n")
 
         game.start_game
         game.make_move('Cathy', 5)
       end
 
-      it 'updates the board for that position' do
+      it 'updates the board when there is already a chip in the selected row' do
         expect(game).to receive(:puts).with("⚬  ⚬  ⚬  ⚬  ⚬  ⚬  ⚬  \n⚬  ⚬  ⚬  ⚬  ⚬  ⚬  ⚬  \n⚬  ⚬  ⚬  ⚬  ⚬  ⚬  ⚬  \n⚬  ⚬  ⚬  ⚬  ⚬  ⚬  ⚬  \n⚬  ⚬  ⚬  ⚬  ⚪ ⚬  ⚬  \n⚬  ⚬  ⚬  ⚬  ⚫ ⚬  ⚬  \n")
 
         game.start_game
         game.make_move('Cathy', 5)
         game.make_move('Alex', 5)
+      end
+    end
+  end
+
+  describe '#check_if_winner' do
+    context 'when someone wins with four in a row' do
+      before do
+        allow(game).to receive(:gets).and_return('Cathy', 'Alex')
+      end
+      it 'declares a winner' do
+        expect(game).to receive(:puts).with('Cathy wins!')
+
+        game.start_game
+
+        game.make_move('Cathy', 1)
+        game.make_move('Cathy', 2)
+        game.make_move('Cathy', 3)
+        game.make_move('Cathy', 4)
+        game.check_winner
+      end
+    end
+
+    context 'when someone wins with four in a column' do
+      before do
+        allow(game).to receive(:gets).and_return('Cathy', 'Alex')
+      end
+
+      it 'declares a winner' do
+        expect(game).to receive(:puts).with('Cathy wins!')
+
+        game.start_game
+
+        game.make_move('Cathy', 2)
+        game.make_move('Cathy', 2)
+        game.make_move('Cathy', 2)
+        game.make_move('Cathy', 2)
+        game.check_winner
       end
     end
   end
