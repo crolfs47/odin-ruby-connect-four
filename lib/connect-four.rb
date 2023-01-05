@@ -1,20 +1,36 @@
+require 'game-board'
+
 class ConnectFour
   def initialize
     @player_one = ''
     @player_two = ''
+    @board = GameBoard.new
   end
-
-  def setup_players
-    puts 'Enter player one name:'
-    puts 'Enter player two name:'
-  end
-
 
   def setup_player_one
+    puts 'Enter player one name:'
     @player_one = gets.chomp
   end
 
   def setup_player_two
+    puts 'Enter player two name:'
     @player_two = gets.chomp
+  end
+
+  def start_game
+    setup_player_one
+    setup_player_two
+    puts "#{@player_one}'s turn: "
+    puts @board.print
+    puts "Please enter a column: "
+  end
+
+  def make_move(player, column)
+    if player == @player_one
+      @board.place_chip(@board.black, column)
+    else
+      @board.place_chip(@board.white, column)
+    end
+    puts @board.print
   end
 end
