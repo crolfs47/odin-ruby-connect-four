@@ -1,5 +1,5 @@
 class GameBoard
-  attr_reader :white, :black
+  attr_reader :white, :black, :board
 
   def initialize
     @board = Array.new(6) { Array.new(7) }

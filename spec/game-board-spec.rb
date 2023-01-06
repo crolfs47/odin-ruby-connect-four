@@ -115,4 +115,21 @@ describe GameBoard do
       end
     end
   end
+
+  describe '#place_chip' do
+    context 'when a player places a chip' do
+      subject(:board_move) { described_class.new }
+      it 'should put a chip in the correct column' do
+        board_move.place_chip('⚪', 4)
+        expect(board_move.board[5]).to eq([nil, nil, nil, '⚪', nil, nil, nil])
+      end
+
+      it 'should put a chip on top of an already placed chip' do
+        board_move.place_chip('⚪', 2)
+        board_move.place_chip('⚫', 2)
+        expect(board_move.board[5]).to eq([nil, '⚪', nil, nil, nil, nil, nil])
+        expect(board_move.board[4]).to eq([nil, '⚫', nil, nil, nil, nil, nil])
+      end
+    end
+  end
 end
