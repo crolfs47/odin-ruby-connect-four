@@ -1,10 +1,13 @@
+require 'player'
+
 class GameBoard
   attr_reader :white, :black, :board
 
-  def initialize
+  def initialize(black, white)
     @board = Array.new(6) { Array.new(7) }
-    @white = '⚪'
-    @black = '⚫'
+    @black = black
+    @white = white
+    
   end
 
   def place_chip(player, column)
@@ -32,26 +35,46 @@ class GameBoard
     puts board_string
   end
 
-  def check_if_row_winner
-    count = 0
-    winning_color = nil
-    @board.each do |row|
-      winning_color = nil
-      row.each do |column|
-        break if count == 4
+  # def check_if_row_winner
+  #   count = 0
+  #   winning_color = nil
+  #   @board.each do |row|
+  #     winning_color = nil
+  #     row.each do |column|
+  #       break if count == 4
 
-        if !column.nil?
-          winning_color = column
-          count += 1
-        elsif column == winning_color && !column.nil?
-          count += 1
-        else
-          winning_color = nil
-          count = 0
+  #       if !column.nil?
+  #         winning_color = column
+  #         count += 1
+  #       elsif column == winning_color && !column.nil?
+  #         count += 1
+  #       else
+  #         winning_color = nil
+  #         count = 0
+  #       end
+  #     end
+  #   end
+  #   winning_color
+  # end
+
+  def check_row_winner
+    0.upto(5) do |row|
+      0.upto(3) do |col|
+        if !@board[row][col].nil? && @board[row][col] == @board[row][col + 1] && @board[row][col] == @board[row][col + 2] && @board[row][col] == @board[row][col + 3]
+          return true
         end
       end
     end
-    winning_color
+  end
+
+  def check_column_winner
+    0.upto(2) do |row|
+      0.upto(5) do |col|
+        if !@board[row][col].nil? && @board[row][col] == @board[row + 1][col] && @board[row][col] == @board[row + 2][col] && @board[row][col] == @board[row + 3][col]
+          return true
+        end
+      end
+    end
   end
 
   def check_if_column_winner

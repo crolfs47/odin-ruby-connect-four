@@ -8,7 +8,7 @@ class ConnectFour
     @player_one = Player.new('Player 1', '⚫')
     @player_two = Player.new('Player 2', '⚪')
     @current_player = @player_one
-    @board = GameBoard.new
+    @board = GameBoard.new(@player_one.color, @player_two.color)
   end
 
   # Don't need to test methods that only contain puts and/or gets, these probably s/b private methods. See Ruby testing exercise 13 - input_ouput
