@@ -47,6 +47,42 @@ describe ConnectFour do
     end
   end
 
+  describe '#switch_player' do
+    subject(:game_switch_player) { described_class.new }
+    context 'when it is the next players turn' do
+      it 'should switch from player 1 to player 2' do
+        current_player = game_switch_player.switch_player
+
+        expect(current_player).to eq(game_switch_player.player_two)
+      end
+      it 'should switch from player 2 to player 1' do
+
+      end
+    end
+  end
+
+
+  describe '#game_over' do
+    subject(:game) { described_class.new }
+    let(:board) { instance_double(GameBoard('⚫', '⚪'))}
+
+    context 'when the game is over' do
+      it 'should return true when someone wins' do
+        
+        game_over = game.game_over
+
+        expect(game_over).to be(true)
+      end
+      it 'should return true when there is a tie' do
+      end
+      it 'should return false when there is no tie or winner' do
+      end
+    end
+  end
+
+  describe '#check_if_tie' do
+  end
+end
 
 
   # describe '#start_game' do
@@ -71,19 +107,7 @@ describe ConnectFour do
   #   end
   # end
 
-  describe '#switch_player' do
-    subject(:game_switch_player) { described_class.new }
-    context 'when it is the next players turn' do
-      it 'should switch from player 1 to player 2' do
-        current_player = game_switch_player.switch_player
 
-        expect(current_player).to eq(game_switch_player.player_two)
-      end
-      it 'should switch from player 2 to player 1' do
-
-      end
-    end
-  end
 
   # describe '#make_move' do
   #   context 'when a player makes a move' do
@@ -106,4 +130,4 @@ describe ConnectFour do
   #     end
   #   end
   # end
-end
+

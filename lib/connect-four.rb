@@ -24,12 +24,23 @@ class ConnectFour
     @player_two
   end
 
-  def start_game
+  def play_game
+    puts 'Welcome to Connect Four!'
     setup_player_one
     setup_player_two
-    puts "#{@player_one}'s turn: "
-    puts @board.print
-    puts "Please enter a column: "
+    take_turn
+  end
+
+  def take_turn
+    until game_over?
+      puts "#{@current_player}'s turn: "
+      puts @board.print
+      puts 'Please enter a column: '
+      column = gets.chomp.to_i
+      @board.place_chip(@current_player.color, column)
+      switch_player
+      take_turn
+    end
   end
 
   def switch_player
@@ -45,13 +56,7 @@ class ConnectFour
     puts @board.print
   end
 
-  def check_winner
-    color = @board.check_winner
-    if color == @board.black
-      puts "#{@player_one} wins!"
-    end
-    if color == @board.white
-      puts "#{@player_two} wins!"
-    end
+  def game_over?
+    
   end
 end
