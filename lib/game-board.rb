@@ -55,33 +55,62 @@ class GameBoard
   end
 
   def check_if_column_winner
-    count = 0
     winning_color = nil
+    winner = nil
     @board.each_with_index do |row, row_index|
       winning_color = nil
       row.each_with_index do |column, column_index|
         if !column.nil?
           winning_color = column
-          count += 1
         elsif !winning_color.nil?
-          for winning_row in (row_index+1)..5 do
-            if @board[winning_row][column_index - 1] == winning_color
-              count += 1
-            end
+          count = 1
+          for winning_row in row_index..5 do
+            winner = winning_color if count == 4
+            count += 1 if @board[winning_row][column_index - 1] == winning_color
           end
         else
-          count = 0
           winning_color = nil
         end
       end
-      break if count == 4
     end
-    winning_color
+    winner
+  end
+
+  def check_if_diagonal_winner
+    winning_color = nil
+    winner = nil
+    @board.each_with_index do |row, row_index|
+      row.each_with_index do |column, column_index|
+        if !column.nil?
+          winning_color = column
+        elsif !winning_color.nil?
+          winning_column_index = column_index - 1
+          count = 1
+          for winning_row in row_index..5 do
+            winner = winning_color if count == 4
+            count += 1 if @board[winning_row][winning_column_index] == winning_color && winning_column_index > 0
+            winning_column_index -= 1
+          end
+
+          winning_column_index = column_index - 1
+          count = 1
+          for winning_row in row_index..5 do
+            winner = winning_color if count == 4
+            count += 1 if @board[winning_row][winning_column_index] == winning_color && winning_column_index > 0
+            winning_column_index += 1
+          end
+        else
+          winning_color = nil
+        end
+      end
+    end
+    winner
   end
 
   def check_winner
     winner = check_if_row_winner
     winner ||= check_if_column_winner
+    winner ||= check_if_diagonal_winner
     winner
   end
 end
