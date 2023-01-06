@@ -29,7 +29,7 @@ class GameBoard
       end
       board_string += "\n"
     end
-    board_string
+    puts board_string
   end
 
   def check_if_row_winner

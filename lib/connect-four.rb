@@ -15,11 +15,13 @@ class ConnectFour
   def setup_player_one
     puts 'Enter player one name:'
     @player_one.name = gets.chomp
+    @player_one
   end
 
   def setup_player_two
     puts 'Enter player two name:'
     @player_two.name = gets.chomp
+    @player_two
   end
 
   def start_game
