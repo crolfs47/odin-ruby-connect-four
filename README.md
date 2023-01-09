@@ -21,4 +21,5 @@ Build a simple connect four game that runs in the command line using TDD.
  - Could make it better visually in the command line
 
 Assignment - https://www.theodinproject.com/lessons/ruby-connect-four
+
 Play Here - https://replit.com/@CathyRolfs/odin-ruby-connect-four#lib/main.rb
