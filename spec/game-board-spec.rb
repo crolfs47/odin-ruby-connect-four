@@ -16,6 +16,26 @@ describe GameBoard do
         expect(board_move.board[5]).to eq([nil, '⚪', nil, nil, nil, nil, nil])
         expect(board_move.board[4]).to eq([nil, '⚫', nil, nil, nil, nil, nil])
       end
+
+      it 'should not place a chip in a full column' do
+        expect(board_move).to receive(:puts)
+        
+        board_move.place_chip('⚪', 2)
+        board_move.place_chip('⚪', 2)
+        board_move.place_chip('⚪', 2)
+        board_move.place_chip('⚪', 2)
+        board_move.place_chip('⚪', 2)
+        board_move.place_chip('⚪', 2)
+        board_move.place_chip('⚫', 2)
+        
+        expect(board_move.board[5]).to eq([nil, '⚪', nil, nil, nil, nil, nil])
+        expect(board_move.board[4]).to eq([nil, '⚪', nil, nil, nil, nil, nil])
+        expect(board_move.board[3]).to eq([nil, '⚪', nil, nil, nil, nil, nil])
+        expect(board_move.board[2]).to eq([nil, '⚪', nil, nil, nil, nil, nil])
+        expect(board_move.board[1]).to eq([nil, '⚪', nil, nil, nil, nil, nil])
+        expect(board_move.board[0]).to eq([nil, '⚪', nil, nil, nil, nil, nil])
+
+      end
     end
   end
 

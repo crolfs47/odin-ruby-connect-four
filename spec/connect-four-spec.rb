@@ -55,7 +55,6 @@ describe ConnectFour do
     end
   end
 
-
   describe '#game_over' do
     let(:board) { instance_double(GameBoard)}
     subject(:game) { described_class.new(board) }

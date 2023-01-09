@@ -10,13 +10,19 @@ class GameBoard
   end
 
   def place_chip(player_color, column)
+    col = column - 1
     @board.each_with_index do |_row, index|
-      if @board[index][column - 1] == @black || @board[index][column - 1] == @white
-        @board[index - 1][column - 1] = player_color
+      if @board[index][col] == @black || @board[index][col] == @white
+        if index.zero?
+          puts "That column is full. Please select another column:"
+          return false
+        end
+        @board[index - 1][col] = player_color
         break
       end
-      @board[index][column - 1] = player_color if index == 5
+      @board[index][col] = player_color if index == 5
     end
+    true
   end
 
   def print

@@ -40,9 +40,10 @@ class ConnectFour
       puts @board.print
       puts 'Please enter a column: '
       column = gets.chomp.to_i
-      @board.place_chip(@current_player.color, column)
-      @turn_count += 1
-      switch_player
+      if @board.place_chip(@current_player.color, column)
+        @turn_count += 1
+        switch_player
+      end
       take_turn
     end
   end
