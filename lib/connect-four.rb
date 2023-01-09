@@ -59,7 +59,15 @@ class ConnectFour
   end
 
   def game_over?
-    @board.check_winner
+    if @board.check_winner
+      puts "Congratulations! #{@current_player.name} wins!"
+      true
+    elsif check_if_full?
+      puts "It's a tie!"
+      true
+    else
+      false
+    end
   end
 
   def check_if_full?
