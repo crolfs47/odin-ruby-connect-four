@@ -87,6 +87,12 @@ describe ConnectFour do
         expect { game.game_over? }.to output(tie_phrase).to_stdout
       end
       it 'should return false when there is no tie or winner' do
+        expect(board).to receive(:check_winner).and_return(false)
+        expect(game).to receive(:check_if_full?).and_return(false)
+
+        game_over = game.game_over?
+
+        expect(game_over).to be(false)
       end
     end
   end
