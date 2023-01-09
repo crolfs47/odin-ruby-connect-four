@@ -7,7 +7,6 @@ class GameBoard
     @board = Array.new(6) { Array.new(7) }
     @black = black
     @white = white
-    
   end
 
   def place_chip(player_color, column)
@@ -43,7 +42,7 @@ class GameBoard
         end
       end
     end
-    return false
+    false
   end
 
   def check_column_winner
@@ -54,7 +53,7 @@ class GameBoard
         end
       end
     end
-    return false
+    false
   end
 
   def check_forward_diagonal_winner
@@ -65,7 +64,7 @@ class GameBoard
         end
       end
     end
-    return false
+    false
   end
 
   def check_backward_diagonal_winner
@@ -76,15 +75,11 @@ class GameBoard
         end
       end
     end
-    return false
+    false
   end
 
   def check_winner
-    if check_row_winner == true || check_column_winner == true || check_forward_diagonal_winner == true || check_backward_diagonal_winner == true
-      true
-    else
-      false
-    end
+    check_row_winner == true || check_column_winner == true || check_forward_diagonal_winner == true || check_backward_diagonal_winner == true
   end
 end
 

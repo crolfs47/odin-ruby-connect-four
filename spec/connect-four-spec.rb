@@ -63,13 +63,16 @@ describe ConnectFour do
 
 
   describe '#game_over' do
-    subject(:game) { described_class.new }
-    let(:board) { instance_double(GameBoard('⚫', '⚪'))}
+    let(:board) { instance_double(GameBoard)}
+    subject(:game) { described_class.new(board) }
 
     context 'when the game is over' do
       it 'should return true when someone wins' do
-        
-        game_over = game.game_over
+        # allow(board).to receive(:check_winner).and_return(true)
+        # allow(game).to receive(board).with(:new("white", "black"))
+        expect(board).to receive(:check_winner).and_return(true)
+
+        game_over = game.game_over?
 
         expect(game_over).to be(true)
       end

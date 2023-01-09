@@ -4,11 +4,11 @@ require 'player'
 class ConnectFour
   attr_reader :player_one, :player_two, :current_player, :board
 
-  def initialize
+  def initialize(board = nil)
     @player_one = Player.new('Player 1', '⚫')
     @player_two = Player.new('Player 2', '⚪')
     @current_player = @player_one
-    @board = GameBoard.new(@player_one.color, @player_two.color)
+    @board = board == nil ? GameBoard.new(@player_one.color, @player_two.color) : board
   end
 
   # Don't need to test methods that only contain puts and/or gets, these probably s/b private methods. See Ruby testing exercise 13 - input_ouput
@@ -57,6 +57,6 @@ class ConnectFour
   end
 
   def game_over?
-    
+    @board.check_winner
   end
 end
