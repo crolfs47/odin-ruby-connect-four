@@ -83,6 +83,8 @@ class GameBoard
   end
 end
 
+
+# first attempt at checking for winners, too complicated
   # def check_if_row_winner
   #   count = 0
   #   winning_color = nil

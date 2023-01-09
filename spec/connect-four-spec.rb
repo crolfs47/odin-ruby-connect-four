@@ -2,11 +2,6 @@ require './lib/connect-four'
 
 describe ConnectFour do
   subject(:game) { described_class.new }
-  # let(:player_one) { instance_double(Player, name: 'Cathy', color: '⚫') }
-
-  before do
-    # player_one = game.instance_variable_get(:@player_one)
-  end
 
   describe '#initialize' do
     context 'when a new game is initialized' do
@@ -56,7 +51,6 @@ describe ConnectFour do
         expect(current_player).to eq(game_switch_player.player_two)
       end
       it 'should switch from player 2 to player 1' do
-
       end
     end
   end
@@ -68,24 +62,24 @@ describe ConnectFour do
 
     context 'when the game is over' do
       it 'should return true when someone wins' do
-        expect(board).to receive(:check_winner).and_return(true).twice
+        expect(board).to receive(:check_winner).and_return(true).once
+        expect(game).to receive(:puts).with("Congratulations! Player 1 wins!").once
 
         game_over = game.game_over?
-        win_phrase = "Congratulations! Player 1 wins!\n"
 
         expect(game_over).to be(true)
-        expect { game.game_over? }.to output(win_phrase).to_stdout
       end
+
       it 'should return true when there is a tie' do
-        expect(board).to receive(:check_winner).and_return(false).twice
-        expect(game).to receive(:check_if_full?).and_return(true).twice
+        expect(board).to receive(:check_winner).and_return(false).once
+        expect(game).to receive(:check_if_full?).and_return(true).once
+        expect(game).to receive(:puts).with("It's a tie!").once
 
         game_over = game.game_over?
-        tie_phrase = "It's a tie!\n"
 
         expect(game_over).to be(true)
-        expect { game.game_over? }.to output(tie_phrase).to_stdout
       end
+
       it 'should return false when there is no tie or winner' do
         expect(board).to receive(:check_winner).and_return(false)
         expect(game).to receive(:check_if_full?).and_return(false)
@@ -113,51 +107,3 @@ describe ConnectFour do
     end
   end
 end
-
-
-  # describe '#start_game' do
-  #   context "when it's the first turn" do
-  #     it "prints that it's player one's turn" do
-  #       allow(game).to receive(:gets).and_return('Cathy', 'Alex')
-
-  #       expect(game).to receive(:puts).with("Cathy's turn: ")
-
-  #       game.start_game
-  #     end
-
-  #     it 'prints the empty board and asks for their move' do
-  #       allow(game).to receive(:gets).and_return('Cathy', 'Alex')
-
-  #       expect(game).to receive(:puts).with("⚬  ⚬  ⚬  ⚬  ⚬  ⚬  ⚬  \n⚬  ⚬  ⚬  ⚬  ⚬  ⚬  ⚬  \n⚬  ⚬  ⚬  ⚬  ⚬  ⚬  ⚬  \n⚬  ⚬  ⚬  ⚬  ⚬  ⚬  ⚬  \n⚬  ⚬  ⚬  ⚬  ⚬  ⚬  ⚬  \n⚬  ⚬  ⚬  ⚬  ⚬  ⚬  ⚬  \n")
-
-  #       expect(game).to receive(:puts).with('Please enter a column: ')
-
-  #       game.start_game
-  #     end
-  #   end
-  # end
-
-
-
-  # describe '#make_move' do
-  #   context 'when a player makes a move' do
-  #     before do
-  #       allow(game).to receive(:gets).and_return('Cathy', 'Alex')
-  #     end
-  #     it 'updates the board first position in a row' do
-  #       expect(game).to receive(:puts).with("⚬  ⚬  ⚬  ⚬  ⚬  ⚬  ⚬  \n⚬  ⚬  ⚬  ⚬  ⚬  ⚬  ⚬  \n⚬  ⚬  ⚬  ⚬  ⚬  ⚬  ⚬  \n⚬  ⚬  ⚬  ⚬  ⚬  ⚬  ⚬  \n⚬  ⚬  ⚬  ⚬  ⚬  ⚬  ⚬  \n⚬  ⚬  ⚬  ⚬  ⚫ ⚬  ⚬  \n")
-
-  #       game.start_game
-  #       game.make_move('Cathy', 5)
-  #     end
-
-  #     it 'updates the board when there is already a chip in the selected row' do
-  #       expect(game).to receive(:puts).with("⚬  ⚬  ⚬  ⚬  ⚬  ⚬  ⚬  \n⚬  ⚬  ⚬  ⚬  ⚬  ⚬  ⚬  \n⚬  ⚬  ⚬  ⚬  ⚬  ⚬  ⚬  \n⚬  ⚬  ⚬  ⚬  ⚬  ⚬  ⚬  \n⚬  ⚬  ⚬  ⚬  ⚪ ⚬  ⚬  \n⚬  ⚬  ⚬  ⚬  ⚫ ⚬  ⚬  \n")
-
-  #       game.start_game
-  #       game.make_move('Cathy', 5)
-  #       game.make_move('Alex', 5)
-  #     end
-  #   end
-  # end
-

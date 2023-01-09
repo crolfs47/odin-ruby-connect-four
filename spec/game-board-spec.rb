@@ -147,7 +147,4 @@ describe GameBoard do
       end
     end
   end
-
-
- 
 end
