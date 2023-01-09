@@ -30,14 +30,7 @@ class ConnectFour
     setup_player_one
     setup_player_two
     take_turn
-    puts @board.print
-    if @board.check_winner
-      switch_player
-      puts "#{@current_player.name} wins!" 
-    end 
-    if check_if_full?
-      puts "It's a tie!"
-    end
+    display_result
   end
 
   def take_turn
@@ -75,5 +68,16 @@ class ConnectFour
     return true if @turn_count == 42
 
     false
+  end
+
+  def display_result
+    puts @board.print
+    if @board.check_winner
+      switch_player
+      puts "#{@current_player.name} wins!"
+    end
+    if check_if_full?
+      puts "It's a tie!"
+    end
   end
 end

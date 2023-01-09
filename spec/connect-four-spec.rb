@@ -104,4 +104,31 @@ describe ConnectFour do
       end
     end
   end
+
+  describe '#display_result' do
+    let(:board) { instance_double(GameBoard)}
+    subject(:game) { described_class.new(board) }
+
+    context 'when the game is over' do
+      it 'should return win message when there is a winner' do
+        expect(board).to receive(:print).once
+        expect(board).to receive(:check_winner).and_return(true).once
+        
+        win_message = "\nPlayer 2 wins!\n"
+
+        expect { game.display_result }.to output(win_message).to_stdout
+      end
+      it 'should return tie message when there is a tie' do
+        expect(board).to receive(:print).once
+        expect(board).to receive(:check_winner).and_return(false).once
+        expect(game).to receive(:check_if_full?).and_return(true).once
+
+        tie_message = "\nIt's a tie!\n"
+
+        expect { game.display_result }.to output(tie_message).to_stdout
+      end
+      it 'should return no message when there is no winner or tie' do
+      end
+    end
+  end
 end
