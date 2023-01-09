@@ -16,25 +16,40 @@ describe GameBoard do
         expect(board_move.board[5]).to eq([nil, '⚪', nil, nil, nil, nil, nil])
         expect(board_move.board[4]).to eq([nil, '⚫', nil, nil, nil, nil, nil])
       end
+    end
+  end
 
-      it 'should not place a chip in a full column' do
-        expect(board_move).to receive(:puts)
-        
-        board_move.place_chip('⚪', 2)
-        board_move.place_chip('⚪', 2)
-        board_move.place_chip('⚪', 2)
-        board_move.place_chip('⚪', 2)
-        board_move.place_chip('⚪', 2)
-        board_move.place_chip('⚪', 2)
-        board_move.place_chip('⚫', 2)
-        
-        expect(board_move.board[5]).to eq([nil, '⚪', nil, nil, nil, nil, nil])
-        expect(board_move.board[4]).to eq([nil, '⚪', nil, nil, nil, nil, nil])
-        expect(board_move.board[3]).to eq([nil, '⚪', nil, nil, nil, nil, nil])
-        expect(board_move.board[2]).to eq([nil, '⚪', nil, nil, nil, nil, nil])
-        expect(board_move.board[1]).to eq([nil, '⚪', nil, nil, nil, nil, nil])
-        expect(board_move.board[0]).to eq([nil, '⚪', nil, nil, nil, nil, nil])
+  describe '#check_valid_move' do
+    subject(:board) { described_class.new('⚫', '⚪') }
+    context 'when a player selects an invalid column' do 
+      it 'should return false' do
+        expect(board).to receive(:puts)
 
+        result = board.check_valid_move?(8)
+
+        expect(result).to eq(false)
+      end
+    end
+    context "when a player selects a column that's already full" do
+      it 'should return false' do
+        expect(board).to receive(:puts)
+
+        board.place_chip('⚪', 2)
+        board.place_chip('⚪', 2)
+        board.place_chip('⚪', 2)
+        board.place_chip('⚪', 2)
+        board.place_chip('⚪', 2)
+        board.place_chip('⚪', 2)
+        result = board.check_valid_move?(2)
+
+        expect(result).to eq(false)
+      end
+    end
+    context 'when a player selects a valid column' do
+      it 'should return true' do
+        result = board.check_valid_move?(6)
+
+        expect(result).to eq(true)
       end
     end
   end

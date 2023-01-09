@@ -10,19 +10,29 @@ class GameBoard
   end
 
   def place_chip(player_color, column)
+    return false unless check_valid_move?(column)
+
     col = column - 1
     @board.each_with_index do |_row, index|
       if @board[index][col] == @black || @board[index][col] == @white
-        if index.zero?
-          puts "That column is full. Please select another column:"
-          return false
-        end
         @board[index - 1][col] = player_color
         break
       end
       @board[index][col] = player_color if index == 5
     end
     true
+  end
+
+  def check_valid_move?(column)
+    if !column.between?(1, 7)
+      puts "\nPlease select a valid column (1-7)."
+      false
+    elsif !@board[0][column - 1].nil?
+      puts "\nThat column is full. Please select another column."
+      false
+    else
+      true
+    end
   end
 
   def print
