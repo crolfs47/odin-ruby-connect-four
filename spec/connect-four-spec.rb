@@ -112,7 +112,7 @@ describe ConnectFour do
       it 'should return win message when there is a winner' do
         expect(board).to receive(:print).once
         expect(board).to receive(:check_winner).and_return(true).once
-        
+
         win_message = "\nPlayer 2 wins!\n"
 
         expect { game.display_result }.to output(win_message).to_stdout

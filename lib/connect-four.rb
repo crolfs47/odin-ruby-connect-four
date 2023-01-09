@@ -8,7 +8,7 @@ class ConnectFour
     @player_one = Player.new('Player 1', '⚫')
     @player_two = Player.new('Player 2', '⚪')
     @current_player = @player_one
-    @board = board == nil ? GameBoard.new(@player_one.color, @player_two.color) : board
+    @board = board.nil? ? GameBoard.new(@player_one.color, @player_two.color) : board
     @turn_count = turn_count
   end
 
@@ -77,8 +77,6 @@ class ConnectFour
       switch_player
       puts "#{@current_player.name} wins!"
     end
-    if check_if_full?
-      puts "It's a tie!"
-    end
+    puts "It's a tie!" if check_if_full?
   end
 end

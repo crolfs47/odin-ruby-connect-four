@@ -21,7 +21,7 @@ describe GameBoard do
 
   describe '#check_valid_move' do
     subject(:board) { described_class.new('⚫', '⚪') }
-    context 'when a player selects an invalid column' do 
+    context 'when a player selects an invalid column' do
       it 'should return false' do
         expect(board).to receive(:puts)
 
