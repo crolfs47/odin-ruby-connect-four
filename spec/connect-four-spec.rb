@@ -77,13 +77,32 @@ describe ConnectFour do
         expect(game_over).to be(true)
       end
       it 'should return true when there is a tie' do
+        expect(game).to receive(:check_if_full?).and_return(true)
+        expect(board).to receive(:check_winner).and_return(false)
+
+        game_over = game.game_over?
+
+        expect(game_over).to be(true)
       end
       it 'should return false when there is no tie or winner' do
       end
     end
   end
 
-  describe '#check_if_tie' do
+  describe '#check_if_full?' do
+    
+    context 'when the board is full' do
+      subject(:game) { described_class.new(nil, 42) }
+      it 'should return true' do
+        expect(game.check_if_full?).to be(true)
+      end
+    end
+    context 'when the board is not full' do
+      subject(:game) { described_class.new(nil, 41) }
+      it 'should return false' do
+        expect(game.check_if_full?).to be(false)
+      end
+    end
   end
 end
 

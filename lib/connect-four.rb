@@ -4,11 +4,12 @@ require 'player'
 class ConnectFour
   attr_reader :player_one, :player_two, :current_player, :board
 
-  def initialize(board = nil)
+  def initialize(board = nil, turn_count = 0)
     @player_one = Player.new('Player 1', '⚫')
     @player_two = Player.new('Player 2', '⚪')
     @current_player = @player_one
     @board = board == nil ? GameBoard.new(@player_one.color, @player_two.color) : board
+    @turn_count = turn_count
   end
 
   # Don't need to test methods that only contain puts and/or gets, these probably s/b private methods. See Ruby testing exercise 13 - input_ouput
@@ -38,6 +39,7 @@ class ConnectFour
       puts 'Please enter a column: '
       column = gets.chomp.to_i
       @board.place_chip(@current_player.color, column)
+      @turn_count += 1
       switch_player
       take_turn
     end
@@ -58,5 +60,11 @@ class ConnectFour
 
   def game_over?
     @board.check_winner
+  end
+
+  def check_if_full?
+    return true if @turn_count == 42
+
+    false
   end
 end
