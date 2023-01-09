@@ -1,5 +1,5 @@
-require 'game-board'
-require 'player'
+require_relative 'game-board'
+require_relative 'player'
 
 class ConnectFour
   attr_reader :player_one, :player_two, :current_player, :board
@@ -30,11 +30,20 @@ class ConnectFour
     setup_player_one
     setup_player_two
     take_turn
+    puts @board.print
+    if @board.check_winner
+      switch_player
+      puts "#{@current_player.name} wins!" 
+    end 
+    if check_if_full?
+      puts "It's a tie!"
+    end
   end
 
   def take_turn
     until game_over?
-      puts "#{@current_player}'s turn: "
+      puts ''
+      puts "#{@current_player.name}'s turn: "
       puts @board.print
       puts 'Please enter a column: '
       column = gets.chomp.to_i
@@ -59,15 +68,7 @@ class ConnectFour
   end
 
   def game_over?
-    if @board.check_winner
-      puts "Congratulations! #{@current_player.name} wins!"
-      true
-    elsif check_if_full?
-      puts "It's a tie!"
-      true
-    else
-      false
-    end
+    @board.check_winner || check_if_full?
   end
 
   def check_if_full?

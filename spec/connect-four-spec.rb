@@ -63,7 +63,6 @@ describe ConnectFour do
     context 'when the game is over' do
       it 'should return true when someone wins' do
         expect(board).to receive(:check_winner).and_return(true).once
-        expect(game).to receive(:puts).with("Congratulations! Player 1 wins!").once
 
         game_over = game.game_over?
 
@@ -73,7 +72,6 @@ describe ConnectFour do
       it 'should return true when there is a tie' do
         expect(board).to receive(:check_winner).and_return(false).once
         expect(game).to receive(:check_if_full?).and_return(true).once
-        expect(game).to receive(:puts).with("It's a tie!").once
 
         game_over = game.game_over?
 

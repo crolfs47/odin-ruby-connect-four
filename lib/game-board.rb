@@ -1,4 +1,4 @@
-require 'player'
+require_relative 'player'
 
 class GameBoard
   attr_reader :white, :black, :board
