@@ -1,7 +1,7 @@
 # odin-ruby-connect-four
 ## The Odin Project - Ruby Project: Connect Four
 
-Build connect four game that runs in the command line using TDD.
+Build a simple connect four game that runs in the command line using TDD.
 
 ## Languages/Technologies used:
  - Ruby
