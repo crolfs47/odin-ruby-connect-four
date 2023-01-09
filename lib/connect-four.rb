@@ -27,6 +27,7 @@ class ConnectFour
 
   def play_game
     puts 'Welcome to Connect Four!'
+    puts 'This is a two player game. The first player to get 4 pieces in a row (horizontally, vertically, or diagonally wins.'
     setup_player_one
     setup_player_two
     take_turn
