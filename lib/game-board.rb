@@ -74,7 +74,7 @@ class GameBoard
 
   def check_forward_diagonal_winner
     0.upto(2) do |row|
-      0.upto(3) do |col|
+      3.upto(6) do |col|
         if !@board[row][col].nil? && @board[row][col] == @board[row + 1][col - 1] && @board[row][col] == @board[row + 2][col - 2] && @board[row][col] == @board[row + 3][col - 3]
           return true
         end
