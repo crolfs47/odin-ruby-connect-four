@@ -22,4 +22,4 @@ Build a simple connect four game that runs in the command line using TDD.
 
 Assignment - https://www.theodinproject.com/lessons/ruby-connect-four
 
-Play Here - https://replit.com/@CathyRolfs/odin-ruby-connect-four
+Play Here - https://replit.com/@CathyRolfs/odin-ruby-connect-four?v=1
